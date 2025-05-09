@@ -1,0 +1,41 @@
+name: .NET
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  
+
+jobs:
+  buildProject:
+
+    env:
+      BuildConfiguration: "Release"
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 9.0.x
+        
+    - name: Restore dependencies
+      run: dotnet restore **/src.csproj
+      
+    - name: Build
+      run: dotnet build **/src.csproj --no-restore --configuration ${{ env.BuildConfiguration }}
+      
+    - name: Publish
+      run: dotnet publish **/src.csproj --no-build --configuration ${{ env.BuildConfiguration }} --output webapp
+
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v4.6.2
+      with:
+        name: myapp
+        path: webapp
+
+
