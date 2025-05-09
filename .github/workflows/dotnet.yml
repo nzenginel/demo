@@ -38,4 +38,20 @@ jobs:
         name: myapp
         path: webapp
 
+  testDeploy:
+    needs: buildProject
+
+    runs-on: self-hosted
+    environment: TEST
+    steps:
+     - name: Download a Build Artifact
+       uses: actions/download-artifact@v4.3.0
+       with:
+          name: myapp
+     - name: Copy Artifact
+       run: |
+         Copy-Item -Path ${{ github.workspace }} -Destination c:\publish\ghDeploy
+       shell: powershell
+
+
 
