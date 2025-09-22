@@ -2,4 +2,4 @@
 Hello world!
 My world
 
-Azure DevOps Pipelines
+Azure DevOps Pipelines for CI and PR
