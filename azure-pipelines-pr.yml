@@ -1,0 +1,12 @@
+pr:
+- main
+- releases/*
+
+pool:
+  name: default
+
+steps:
+- script: echo Hello, PR!
+  displayName: 'Run a one-line script'
+
+
