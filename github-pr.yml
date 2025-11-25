@@ -5,6 +5,9 @@ pr:
 - main
 - releases/*
 
+workspace:
+  clean: all
+
 pool:
   name: Core
 
