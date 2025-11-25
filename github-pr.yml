@@ -6,13 +6,13 @@ pr:
 - releases/*
 
 pool:
-  vmImage: windows-latest
+  name: Core
 
 variables:
   system.debug: true
   
 steps:
-- checkout: none
+
 - script: |
     echo $(System.PullRequest.TargetBranch)
     echo $(System.PullRequest.targetBranchName)
@@ -20,5 +20,12 @@ steps:
     echo $(System.PullRequest.SourceBranch)
     echo $(Build.SourceBranch)
     echo $(Build.SourceBranchName)
+    echo $(Build.SourceVersion)
+    echo $(System.PullRequest.PullRequestId)
+    
 - script: |
-    git clone "https://github.com/nzenginel/demo.git" --branch $(Build.SourceBranch) --single-branch --depth 1
+    cd $(Build.ArtifactStagingDirectory)
+    git init
+    git remote add origin $(System.PullRequest.SourceRepositoryUri)
+    git fetch origin pull/$(System.PullRequest.PullRequestId)/head:pr-branch
+    git checkout pr-branch
