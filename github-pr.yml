@@ -1,0 +1,18 @@
+trigger:
+- none
+
+pr:
+- main
+- releases/*
+
+pool:
+  vmImage: windows-latest
+
+steps:
+- script: |
+    echo $(System.PullRequest.TargetBranch)
+    echo $(System.PullRequest.targetBranchName)
+    echo $(System.PullRequest.SourceRepositoryUri)
+    echo $(System.PullRequest.SourceBranch)
+    echo $(Build.SourceBranch)
+    echo $(Build.SourceBranchName)
