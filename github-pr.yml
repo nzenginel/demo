@@ -15,36 +15,15 @@ variables:
   system.debug: true
   
 steps:
-
-- script: |
-    echo $(System.PullRequest.TargetBranch)
-    echo $(System.PullRequest.targetBranchName)
-    echo $(System.PullRequest.SourceRepositoryUri)
-    echo $(System.PullRequest.SourceBranch)
-    echo $(Build.SourceBranch)
-    echo $(Build.SourceBranchName)
-    echo $(Build.SourceVersion)
-    echo $(System.PullRequest.PullRequestId)
-    echo $(System.PullRequest.PullRequestNumber)
-    
+- checkout: none
+  
 - task: PowerShell@2
+  displayName: Get merged code
   inputs:
     targetType: 'inline'
     script: |
-      cd $(Build.ArtifactStagingDirectory)
       git clone $(System.PullRequest.SourceRepositoryUri) --branch $(System.PullRequest.TargetBranch) --single-branch --depth 1 .
       $branch = "$(Build.SourceBranch)"
-      $branch
       $branchName = $branch.replace("refs/","")
-      $branchName
       git pull origin $branchName 
 
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: |
-      $fso = Get-ChildItem -Recurse -path $(Build.SourcesDirectory)
-      
-      $fsoBU = Get-ChildItem -Recurse -path $(Build.ArtifactStagingDirectory)
-      
-      Compare-Object -ReferenceObject $fso -DifferenceObject $fsoBU
