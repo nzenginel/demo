@@ -5,6 +5,7 @@ builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
+#main'e comment koydum - pr test
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
