@@ -29,15 +29,6 @@ steps:
     
 - script: |
     cd $(Build.ArtifactStagingDirectory)
-    git init
-    git remote add origin $(System.PullRequest.SourceRepositoryUri)
-    git config --get-all http."$(System.PullRequest.SourceRepositoryUri)".extraheader
-    git config --get-all http.extraheader
-    git config --get-regexp .*extraheader
-    git config --get-all http.proxy
-
-    git --config-env=http.extraheader=env_var_http.extraheader fetch --force --tags --prune --prune-tags -no-recurse-submodules origin --depth=1  +"$(Build.SourceVersion)":refs/remotes/origin/"$(Build.SourceVersion)"
-
-    git --config-env=http.extraheader=env_var_http.extraheader fetch --force --tags --prune --prune-tags  --no-recurse-submodules origin --depth=1  +"$(Build.SourceVersion)"
-
-    git checkout --progress --force refs/remotes/origin/"$(Build.SourceVersion)"
+    git clone git clone $(System.PullRequest.SourceRepositoryUri) --branch $(System.PullRequest.TargetBranch) --single-branch --depth 1 .
+    $branchName = "$(Build.SourceBranch)".replace("refs/","")
+    git pull origin $branchName 
