@@ -30,7 +30,10 @@ steps:
 - script: |
     cd $(Build.ArtifactStagingDirectory)
     git clone $(System.PullRequest.SourceRepositoryUri) --branch $(System.PullRequest.TargetBranch) --single-branch --depth 1 .
-    $branchName = "$(Build.SourceBranch)".replace("refs/","")
+    $branch = "$(Build.SourceBranch)"
+    $branc"
+    $branchName = $branch.replace("refs/","")
+    $branchName
     git pull origin $branchName 
 
 - task: PowerShell@2
