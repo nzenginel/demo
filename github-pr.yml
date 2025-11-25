@@ -28,5 +28,5 @@ steps:
     cd $(Build.ArtifactStagingDirectory)
     git init
     git remote add origin $(System.PullRequest.SourceRepositoryUri)
-    git fetch origin pull/$(System.PullRequest.PullRequestId)/head:pr-branch
+    git fetch origin pull/$(System.PullRequest.PullRequestNumber)/head:pr-branch
     git checkout pr-branch
