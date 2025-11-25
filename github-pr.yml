@@ -31,7 +31,7 @@ steps:
     cd $(Build.ArtifactStagingDirectory)
     git clone $(System.PullRequest.SourceRepositoryUri) --branch $(System.PullRequest.TargetBranch) --single-branch --depth 1 .
     $branch = "$(Build.SourceBranch)"
-    $branc"
+    $branch
     $branchName = $branch.replace("refs/","")
     $branchName
     git pull origin $branchName 
