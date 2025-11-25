@@ -8,6 +8,9 @@ pr:
 pool:
   vmImage: windows-latest
 
+variables:
+  system.debug: true
+  
 steps:
 - checkout: none
 - script: |
@@ -18,4 +21,4 @@ steps:
     echo $(Build.SourceBranch)
     echo $(Build.SourceBranchName)
 - script: |
-    git clone $(System.PullRequest.SourceRepositoryUri) --branch $(Build.SourceBranch) --single-branch
+    git clone "https://github.com/nzenginel/demo.git" --branch $(Build.SourceBranch) --single-branch --depth 1
