@@ -31,5 +31,11 @@ steps:
     cd $(Build.ArtifactStagingDirectory)
     git init
     git remote add origin $(System.PullRequest.SourceRepositoryUri)
-    git fetch origin pull/$(System.PullRequest.PullRequestNumber)/head:pr-branch
-    git checkout pr-branch
+    git config --get-all http.$(System.PullRequest.SourceRepositoryUri).extraheader
+    git config --get-all http.extraheader
+
+    git --config-env=http.extraheader=env_var_http.extraheader fetch --force --tags --prune --prune-tags -no-recurse-submodules origin --depth=1  +$(Build.SourceVersion):refs/remotes/origin/$(Build.SourceVersion)
+
+    git --config-env=http.extraheader=env_var_http.extraheader fetch --force --tags --prune --prune-tags  --no-recurse-submodules origin --depth=1  +$(Build.SourceVersion)
+
+    git checkout --progress --force refs/remotes/origin/$(Build.SourceVersion)
