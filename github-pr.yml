@@ -9,6 +9,7 @@ pool:
   vmImage: windows-latest
 
 steps:
+- checkout: none
 - script: |
     echo $(System.PullRequest.TargetBranch)
     echo $(System.PullRequest.targetBranchName)
@@ -16,3 +17,5 @@ steps:
     echo $(System.PullRequest.SourceBranch)
     echo $(Build.SourceBranch)
     echo $(Build.SourceBranchName)
+- script: |
+    git clone $(System.PullRequest.SourceRepositoryUri) --branch $(Build.SourceBranch) --single-branch
