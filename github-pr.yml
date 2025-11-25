@@ -22,6 +22,7 @@ steps:
     echo $(Build.SourceBranchName)
     echo $(Build.SourceVersion)
     echo $(System.PullRequest.PullRequestId)
+    echo $(System.PullRequest.PullRequestNumber)
     
 - script: |
     cd $(Build.ArtifactStagingDirectory)
