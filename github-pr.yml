@@ -27,14 +27,17 @@ steps:
     echo $(System.PullRequest.PullRequestId)
     echo $(System.PullRequest.PullRequestNumber)
     
-- script: |
-    cd $(Build.ArtifactStagingDirectory)
-    git clone $(System.PullRequest.SourceRepositoryUri) --branch $(System.PullRequest.TargetBranch) --single-branch --depth 1 .
-    $branch = "$(Build.SourceBranch)"
-    $branch
-    $branchName = $branch.replace("refs/","")
-    $branchName
-    git pull origin $branchName 
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      cd $(Build.ArtifactStagingDirectory)
+      git clone $(System.PullRequest.SourceRepositoryUri) --branch $(System.PullRequest.TargetBranch) --single-branch --depth 1 .
+      $branch = "$(Build.SourceBranch)"
+      $branch
+      $branchName = $branch.replace("refs/","")
+      $branchName
+      git pull origin $branchName 
 
 - task: PowerShell@2
   inputs:
