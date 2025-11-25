@@ -32,3 +32,13 @@ steps:
     git clone git clone $(System.PullRequest.SourceRepositoryUri) --branch $(System.PullRequest.TargetBranch) --single-branch --depth 1 .
     $branchName = "$(Build.SourceBranch)".replace("refs/","")
     git pull origin $branchName 
+
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      $fso = Get-ChildItem -Recurse -path $(Build.SourcesDirectory)
+      
+      $fsoBU = Get-ChildItem -Recurse -path $(Build.ArtifactStagingDirectory)
+      
+      Compare-Object -ReferenceObject $fso -DifferenceObject $fsoBU
