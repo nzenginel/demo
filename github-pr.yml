@@ -18,6 +18,16 @@ steps:
 - checkout: none
   
 - task: PowerShell@2
+  displayName: 'Display PR Info'
+  inputs:
+    targetType: 'inline'
+    script: |
+      echo "PR Repo: $(System.PullRequest.SourceRepositoryUri)"
+      echo "PR Number: $(System.PullRequest.PullRequestNumber)"
+      echo "Source Branch: $(System.PullRequest.SourceBranch)"
+      echo "Target Branch: $(System.PullRequest.TargetBranch)"
+
+- task: PowerShell@2
   displayName: Get merged code
   inputs:
     targetType: 'inline'
