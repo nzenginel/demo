@@ -24,6 +24,9 @@ jobs:
       with:
         dotnet-version: 9.0.x
 
+    - name: Add MSBuild to PATH
+      uses: microsoft/setup-msbuild@v1.0.2
+      
     - name: Auth Nuget
       if: ${{ false }}
       run: |
