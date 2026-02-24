@@ -23,6 +23,10 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 9.0.x
+
+    - name: Auth Nuget
+      run: |
+        dotnet nuget sources add -Name artifactsDemo -userName az -password ${{ secrets.AZURE_DEVOPS_TOKEN }} "https://pkgs.dev.azure.com/cnuran/Essentials/_packaging/artifactdemo/nuget/v3/index.json" -StorePasswordInClearText -NonInteractive
         
     - name: Restore dependencies
       run: dotnet restore **/src.csproj
