@@ -34,7 +34,7 @@ jobs:
 
     - name: Auth Nuget
       run: |
-        nuget sources add -Name artifactsDemo -UserName az -Password ${{ secrets.AZURE_DEVOPS_TOKEN }} -Source "https://pkgs.dev.azure.com/cnuran/Essentials/_packaging/axademo/nuget/v3/index.json/" -StorePasswordInClearText -NonInteractive
+        nuget sources add -Name artifactsDemo -UserName az -Password ${{ secrets.AZURE_DEVOPS_TOKEN }} -Source "https://pkgs.dev.azure.com/cnuran/Essentials/_packaging/axa-feed/nuget/v3/index.json/" -StorePasswordInClearText -NonInteractive
  
     - name: Restore dependencies
       if: ${{ false }}
