@@ -26,7 +26,7 @@ jobs:
 
     - name: Auth Nuget
       run: |
-        dotnet nuget add source --name artifactsDemo --userName az --password ${{ secrets.AZURE_DEVOPS_TOKEN }} "https://pkgs.dev.azure.com/cnuran/Essentials/_packaging/artifactdemo/nuget/v3/index.json" --store-password-in-clear-text
+        dotnet nuget add source --name artifactsDemo --username az --password ${{ secrets.AZURE_DEVOPS_TOKEN }} "https://pkgs.dev.azure.com/cnuran/Essentials/_packaging/artifactdemo/nuget/v3/index.json" --store-password-in-clear-text
         
     - name: Restore dependencies
       run: dotnet restore **/src.csproj 
