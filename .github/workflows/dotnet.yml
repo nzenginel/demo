@@ -25,11 +25,21 @@ jobs:
         dotnet-version: 9.0.x
 
     - name: Auth Nuget
+      if: {{ false }}
       run: |
         dotnet nuget add source --name artifactsDemo --username az --password ${{ secrets.AZURE_DEVOPS_TOKEN }} "https://pkgs.dev.azure.com/cnuran/Essentials/_packaging/artifactdemo/nuget/v3/index.json/" --store-password-in-clear-text
-        
+
+    - name: Auth Nuget
+      run: |
+        nuget sources add -name artifactsDemo -username az -password ${{ secrets.AZURE_DEVOPS_TOKEN }} "https://pkgs.dev.azure.com/cnuran/Essentials/_packaging/artifactdemo/nuget/v3/index.json/" -storepasswordincleartext -noninteractive
+ 
     - name: Restore dependencies
-      run: dotnet restore **/src.csproj --source "artifactsDemo"
+      if: {{ false }}
+      run: dotnet restore **/src.csproj 
+
+    - name: Restore dependencies
+      if: {{ false }}
+      run: nuget restore **/src.csproj -noninteractive
       
     - name: Build
       run: dotnet build **/src.csproj --no-restore --configuration ${{ env.BuildConfiguration }}
