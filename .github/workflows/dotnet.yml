@@ -41,7 +41,7 @@ jobs:
       run: dotnet restore **\src.csproj 
 
     - name: Restore dependencies
-      run: nuget restore **\src.csproj -noninteractive
+      run: nuget restore src\src.csproj -noninteractive
       
     - name: Build
       run: dotnet build **\src.csproj --no-restore --configuration ${{ env.BuildConfiguration }}
