@@ -38,16 +38,16 @@ jobs:
  
     - name: Restore dependencies
       if: ${{ false }}
-      run: dotnet restore **\src.csproj 
+      run: dotnet restore src\src.csproj 
 
     - name: Restore dependencies
       run: nuget restore src\src.csproj -noninteractive
       
     - name: Build
-      run: dotnet build **\src.csproj --no-restore --configuration ${{ env.BuildConfiguration }}
+      run: dotnet build src\src.csproj --no-restore --configuration ${{ env.BuildConfiguration }}
       
     - name: Publish
-      run: dotnet publish **\src.csproj --no-build --configuration ${{ env.BuildConfiguration }} --output webapp
+      run: dotnet publish src\src.csproj --no-build --configuration ${{ env.BuildConfiguration }} --output webapp
 
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v4.6.2
